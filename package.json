@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "client": "npm run start --prefix client",
-    "server":"nodemon app.js",
-    "dev":"concurrently \"npm run server\" \"npm run client\""
+    "server": "nodemon app.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -19,9 +19,11 @@
   },
   "homepage": "https://github.com/FBW44-2/blogs-app#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "concurrently": "^6.2.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.2"
   }
 }

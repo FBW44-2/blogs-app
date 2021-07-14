@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import baseURL from "../../config/baseURL";
 
 export default function SignUp() {
+  const [error, setError] = useState();
+  const [success, setSuccess] = useState();
   const submitHandler = async (e) => {
     e.preventDefault();
     const userName = e.target.username.value;
@@ -20,7 +22,20 @@ export default function SignUp() {
     console.log("Sign up data ==> ", data);
     try {
       const res = await axios.post(baseURL + "/users/signup", data);
-      console.log("RES ==> ", res);
+      if (res.data.error) {
+        setError(res.data.error);
+        setSuccess(null);
+      } else {
+        setError(null);
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userId", res.data.userId);
+        // alert('registered successfully')
+        setSuccess("registered successfully, redirect in 3s");
+        setTimeout(() => {
+          window.location.replace("/");
+        }, 3000);
+      }
+      console.log("RES ==> ", res.data);
     } catch (e) {
       console.log(e);
     }
@@ -29,6 +44,16 @@ export default function SignUp() {
   return (
     <div className="container">
       <h1>Sign Up</h1>
+      {error && (
+        <div class="alert alert-danger" role="alert">
+          {error}
+        </div>
+      )}
+      {success && (
+        <div class="alert alert-success" role="alert">
+          {success}
+        </div>
+      )}
       <form onSubmit={submitHandler}>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">
