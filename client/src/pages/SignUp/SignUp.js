@@ -12,16 +12,16 @@ export default function SignUp() {
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
 
-    const data = {
+    const userData = {
       userName,
       email,
       password,
       confirmPassword,
     };
 
-    console.log("Sign up data ==> ", data);
+    console.log("Sign up data ==> ", userData);
     try {
-      const res = await axios.post(baseURL + "/users/signup", data);
+      const res = await axios.post(baseURL + "/users/signup", userData);
       if (res.data.error) {
         setError(res.data.error);
         setSuccess(null);
@@ -29,7 +29,6 @@ export default function SignUp() {
         setError(null);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("userId", res.data.userId);
-        // alert('registered successfully')
         setSuccess("registered successfully, redirect in 3s");
         setTimeout(() => {
           window.location.replace("/");
