@@ -1,27 +1,31 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const {port, mongoURL}= require('./config/env')
+const express = require("express");
+const mongoose = require("mongoose");
+const core = require("./middleware/security");
+const errorsHandler = require("./middleware/errors");
+const usersRouter = require("./routes/users");
+const { port, mongoURL } = require("./config/env");
 
-mongoose.connect(
-    mongoURL
-    ,{
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useUnifiedTopology: true,
-      } 
-)
-mongoose.connection.on('error', console.error)
-mongoose.connection.on('open',()=>{
-    console.log('Database connected!');
+mongoose.connect(mongoURL, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+});
+mongoose.connection.on("error", console.error);
+mongoose.connection.on("open", () => {
+  console.log("Database connected!");
 });
 
-const app = express()
+const app = express();
+app.use(core);
 
-app.listen(port,()=>{
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
+app.use("/api/v1/users", usersRouter);
 
-    
-    console.log('====================================');
-    console.log('Server start with port: '+port);
-    console.log('====================================');
-})
+app.use(errorsHandler);
+app.listen(port, () => {
+  console.log("====================================");
+  console.log("Server start with port: " + port);
+  console.log("====================================");
+});

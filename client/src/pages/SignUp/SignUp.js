@@ -1,7 +1,9 @@
 import React from "react";
+import axios from "axios";
+import baseURL from "../../config/baseURL";
 
 export default function SignUp() {
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     const userName = e.target.username.value;
     const email = e.target.email.value;
@@ -16,11 +18,16 @@ export default function SignUp() {
     };
 
     console.log("Sign up data ==> ", data);
-
+    try {
+      const res = await axios.post(baseURL + "/users/signup", data);
+      console.log("RES ==> ", res);
+    } catch (e) {
+      console.log(e);
+    }
     // POST req  ==> http://localhost:5000/api/v1/signup
   };
   return (
-    <div>
+    <div className="container">
       <h1>Sign Up</h1>
       <form onSubmit={submitHandler}>
         <div class="mb-3">

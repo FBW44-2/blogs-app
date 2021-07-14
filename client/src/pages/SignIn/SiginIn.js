@@ -15,7 +15,7 @@ export default function SiginIn() {
     // POST req ===> http://localhost:5000/api/v1/signin
   };
   return (
-    <div>
+    <div className="container">
       <h1>Login</h1>
       <form onSubmit={submitHandler}>
         <div class="mb-3">
