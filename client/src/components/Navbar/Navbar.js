@@ -1,7 +1,12 @@
 import React from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
-export default function Navbar() {
+export default function Navbar({ user }) {
+  const onLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    window.location.replace("/");
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -36,32 +41,64 @@ export default function Navbar() {
                 Blogs
               </Link>
             </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                id="navbarDropdownMenuLink"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Register{" "}
-              </a>
-              <ul
-                className="dropdown-menu"
-                aria-labelledby="navbarDropdownMenuLink"
-              >
-                <li>
-                  <Link className="dropdown-item" to="/signin">
-                    Sign in
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item" to="/signup">
-                    Sign up
-                  </Link>
-                </li>
-              </ul>
-            </li>
+            {user ? (
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  id="navbarDropdownMenuLink"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {user.userName} <img src={user.avatar} className="Avatar" />
+                </a>
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="navbarDropdownMenuLink"
+                >
+                  <li>
+                    <Link className="dropdown-item" to="/profile">
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/my-blogs">
+                      My Blogs
+                    </Link>
+                  </li>
+                  <li onClick={onLogout} className="dropdown-item">
+                    Logout
+                  </li>
+                </ul>
+              </li>
+            ) : (
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  id="navbarDropdownMenuLink"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Register{" "}
+                </a>
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="navbarDropdownMenuLink"
+                >
+                  <li>
+                    <Link className="dropdown-item" to="/signin">
+                      Sign in
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/signup">
+                      Sign up
+                    </Link>
+                  </li>
+                </ul>
+              </li>
+            )}
           </ul>
         </div>
       </div>

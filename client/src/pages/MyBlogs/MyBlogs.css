@@ -1,0 +1,9 @@
+.Blog {
+  display: flex;
+}
+.BlogContent {
+  width: 88%;
+}
+.Actions {
+  width: 10%;
+}

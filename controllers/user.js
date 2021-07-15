@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const config = require("../config/env");
 
 exports.signUp = async (req, res, next) => {
   console.log(req.body);
@@ -23,7 +24,7 @@ exports.signUp = async (req, res, next) => {
               userName,
               id: userData._id,
             },
-            "jxbcdsn89890x",
+            config.jwtKey,
             { expiresIn: 2592000000 }
           );
 
@@ -42,4 +43,52 @@ exports.signUp = async (req, res, next) => {
   } catch (e) {
     console.log(e);
   }
+};
+
+exports.signIn = async (req, res, next) => {
+  console.log(req.body);
+  const { email, password } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      const compare = bcrypt.compare(password, user.password);
+      if (compare) {
+        const token = jwt.sign(
+          {
+            email: user.email,
+            userName: user.userName,
+            id: user._id,
+          },
+          config.jwtKey,
+          { expiresIn: 2592000000 }
+        );
+
+        res.json({ token, userId: user._id });
+      } else {
+        res.json({ error: " The password is not correct" });
+      }
+    } else {
+      res.json({ error: email + " does not registered! please sign up" });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+exports.getUser = async (req, res, next) => {
+  const id = req.params.id;
+
+  const user = await User.findById(id).select("email userName avatar");
+  res.send(user);
+  console.log(user);
+};
+
+exports.edit = async (req, res, next) => {
+  const { userName, avatar } = req.body;
+  console.log("req.user", req.user);
+  const user = await User.findById(req.user._id);
+  user.userName = userName;
+  user.avatar = avatar;
+  user.save();
+  res.send(true);
 };

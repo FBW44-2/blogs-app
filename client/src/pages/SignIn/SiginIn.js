@@ -1,51 +1,70 @@
-import React from "react";
-
+import React, { useState } from "react";
+import axios from "axios";
+import baseURL from "../../config/baseURL";
 export default function SiginIn() {
-  const submitHandler = (e) => {
+  const [error, setError] = useState();
+  const submitHandler = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    const data = {
+    const userData = {
       email,
       password,
     };
 
-    console.log("Sign In data => ", data);
+    try {
+      const res = await axios.post(baseURL + "/users/signin", userData);
+      if (res.data.error) {
+        setError(res.data.error);
+      } else {
+        setError(null);
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userId", res.data.userId);
 
-    // POST req ===> http://localhost:5000/api/v1/signin
+        window.location.replace("/");
+      }
+      console.log("RES ==> ", res.data);
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     <div className="container Page">
-      <h1>Login</h1>
+      <h1>Sign in</h1>
+      {error && (
+        <div class="alert alert-danger" role="alert">
+          {error}
+        </div>
+      )}
       <form onSubmit={submitHandler}>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="exampleInputEmail1" className="form-label">
             Email address
           </label>
           <input
             name="email"
             type="email"
-            class="form-control"
+            className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
           />
-          <div id="emailHelp" class="form-text">
+          <div id="emailHelp" className="form-text">
             We'll never share your email with anyone else.
           </div>
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="exampleInputPassword1" className="form-label">
             Password
           </label>
           <input
             name="password"
             type="password"
-            class="form-control"
+            className="form-control"
             id="exampleInputPassword1"
           />
         </div>
 
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" className="btn btn-primary">
           Submit
         </button>
       </form>
