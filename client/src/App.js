@@ -16,6 +16,7 @@ import MyBlogs from "./pages/MyBlogs/MyBlogs";
 import setAuth from "./config/setAuth";
 import CreateBlog from "./pages/CreateBlog/CreateBlog";
 import EditBlog from "./pages/EditBlog/EditBlog";
+import Blog from "./pages/Blog/Blog";
 function App() {
   const [user, setUser] = useState();
 
@@ -86,6 +87,9 @@ function App() {
             <EditBlog user={user} />
           </Route>
         )}
+        <Route exact path="/blog/xxxx">
+          <Blog />
+        </Route>
       </Switch>
 
       <Footer />
