@@ -14,6 +14,8 @@ import baseURL from "./config/baseURL";
 import Profile from "./pages/Profile/Profile";
 import MyBlogs from "./pages/MyBlogs/MyBlogs";
 import setAuth from "./config/setAuth";
+import CreateBlog from "./pages/CreateBlog/CreateBlog";
+import EditBlog from "./pages/EditBlog/EditBlog";
 function App() {
   const [user, setUser] = useState();
 
@@ -72,6 +74,16 @@ function App() {
         {user && (
           <Route exact path="/my-blogs">
             <MyBlogs user={user} />
+          </Route>
+        )}
+        {user && (
+          <Route exact path="/create-blog">
+            <CreateBlog user={user} />
+          </Route>
+        )}
+        {user && (
+          <Route exact path="/edit-blog">
+            <EditBlog user={user} />
           </Route>
         )}
       </Switch>

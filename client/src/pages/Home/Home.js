@@ -1,8 +1,8 @@
 import React from "react";
-
+import "./Home.css";
 export default function Home() {
   return (
-    <header className="Page">
+    <header className="Page Home">
       <div
         id="carouselExampleIndicators"
         className="carousel slide"
@@ -33,16 +33,24 @@ export default function Home() {
         <div className="carousel-inner">
           <div className="carousel-item active">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
+              src="https://webunwto.s3.eu-west-1.amazonaws.com/2020-01/sport-congresse.jpg"
               className="d-block w-100"
               alt="..."
             />
           </div>
           <div className="carousel-item">
-            <img src="..." className="d-block w-100" alt="..." />
+            <img
+              src="https://innovationorigins.com/app/uploads/2021/04/technology-4256272_1920-1004x670.jpg"
+              className="d-block w-100"
+              alt="..."
+            />
           </div>
           <div className="carousel-item">
-            <img src="..." className="d-block w-100" alt="..." />
+            <img
+              src="https://static.posters.cz/image/750/poster/cars-3-cars-3-mcqueen-race-i47515.jpg"
+              className="d-block w-100"
+              alt="..."
+            />
           </div>
         </div>
         <button
