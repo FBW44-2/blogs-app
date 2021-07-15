@@ -41,7 +41,7 @@ export default function SignUp() {
     // POST req  ==> http://localhost:5000/api/v1/signup
   };
   return (
-    <div className="container">
+    <div className="container Page">
       <h1>Sign Up</h1>
       {error && (
         <div class="alert alert-danger" role="alert">
