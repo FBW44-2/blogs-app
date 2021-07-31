@@ -9,7 +9,8 @@ export default function Card({ blog }) {
       <div class="card-body">
         <p class="card-text">
           By: <img src={blog.userId.avatar} className="Avatar" />{" "}
-          {" " + blog.userId.userName}
+          {" " + blog.userId.userName + " | "}{" "}
+          <Moment date={blog.date} fromNow />
         </p>
         <h4 class="card-title">{blog.title}</h4>
       </div>
@@ -17,7 +18,7 @@ export default function Card({ blog }) {
         <small class="text-muted">Category: {blog.category}</small>
         <br />
         <small class="text-muted">
-          Last updated <Moment date={blog.date} fromNow />
+          Last updated <Moment date={blog.update} fromNow />
         </small>
       </div>
     </div>

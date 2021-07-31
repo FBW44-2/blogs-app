@@ -30,6 +30,7 @@ exports.edit = async (req, res, next) => {
     if (category) blog.category = category;
     if (coverImage) blog.coverImage = coverImage;
     if (title) blog.title = title;
+    blog.update = new Date();
     await blog.save();
   }
   res.json(true);

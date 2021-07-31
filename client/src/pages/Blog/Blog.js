@@ -24,8 +24,6 @@ export default function Blog() {
   useEffect(() => {
     getBlog();
   }, []);
-  console.log(blog);
-  console.log("id ==> ", id);
 
   return (
     <div className="container Page">
@@ -36,9 +34,13 @@ export default function Blog() {
           <h1>{blog.title}</h1>
           <figcaption className="blockquote-footer mt-2">
             By: <img src={blog.userId.avatar} className="Avatar" />{" "}
-            {" " + blog.userId.userName}
+            {" " + blog.userId.userName + " | "}
             <cite title="Source Title">
               <Moment date={blog.date} fromNow />
+            </cite>
+            {" | Last update "}{" "}
+            <cite title="Source Title">
+              <Moment date={blog.update} fromNow />
             </cite>
           </figcaption>
           <p

@@ -4,7 +4,7 @@ import baseURL from "../../config/baseURL";
 import { useParams } from "react-router-dom";
 import Spinner from "../../components/Spinner/Spinner";
 import ReactQuill from "react-quill";
-
+import toolbarOptions from "./toolbarOptions";
 export default function EditBlog() {
   const [content, setContent] = useState();
   const [blog, setBlog] = useState([]);
@@ -122,7 +122,12 @@ export default function EditBlog() {
             <label htmlFor="exampleInputPassword1" className="form-label">
               Content
             </label>
-            <ReactQuill value={content} onChange={setContent} theme="snow" />
+            <ReactQuill
+              modules={{ toolbar: toolbarOptions }}
+              value={content}
+              onChange={setContent}
+              theme="snow"
+            />
           </div>
 
           <button type="submit" className="btn btn-primary">

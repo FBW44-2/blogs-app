@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import baseURL from "../../config/baseURL";
 import ReactQuill from "react-quill";
+import toolbarOptions from "./toolbarOptions";
+
 export default function CreateBlog() {
   const [success, setSuccess] = useState();
   const [error, setError] = useState();
@@ -92,7 +94,12 @@ export default function CreateBlog() {
           <label htmlFor="exampleInputPassword1" className="form-label">
             Content
           </label>
-          <ReactQuill value={content} onChange={setContent} theme="snow" />
+          <ReactQuill
+            modules={{ toolbar: toolbarOptions }}
+            value={content}
+            onChange={setContent}
+            theme="snow"
+          />
         </div>
 
         <button type="submit" className="btn btn-primary">

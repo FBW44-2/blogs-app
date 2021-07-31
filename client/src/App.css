@@ -1,3 +1,5 @@
 .Page {
   min-height: 86vh;
+  display: flex;
+  flex-direction: column;
 }

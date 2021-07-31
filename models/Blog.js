@@ -27,6 +27,10 @@ const BlogSchema = new Schema({
     type: String,
     default: new Date(),
   },
+  update: {
+    type: String,
+    default: new Date(),
+  },
 });
 
 module.exports = Blog = mongoose.model("blog", BlogSchema);
