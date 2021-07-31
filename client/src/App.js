@@ -83,11 +83,11 @@ function App() {
           </Route>
         )}
         {user && (
-          <Route exact path="/edit-blog">
+          <Route exact path="/edit-blog/:id">
             <EditBlog user={user} />
           </Route>
         )}
-        <Route exact path="/blog/xxxx">
+        <Route exact path="/blog/:id">
           <Blog />
         </Route>
       </Switch>

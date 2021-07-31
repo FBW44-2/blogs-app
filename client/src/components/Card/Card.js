@@ -1,23 +1,24 @@
 import React from "react";
 import "./Card.css";
+import Moment from "react-moment";
 
-export default function Card() {
+export default function Card({ blog }) {
   return (
-    <div class="card Card">
-      <img
-        src="https://www.dresden.de/media/bilder/sport/1024_LH_Fit_im_Park_2021.jpg"
-        class="card-img-top"
-        alt="..."
-      />
+    <div className="card Card">
+      <img src={blog.coverImage} class="card-img-top" alt="..." />
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
         <p class="card-text">
-          This is a wider card with supporting text below as a natural lead-in
-          to additional content. This content is a little bit longer.
+          By: <img src={blog.userId.avatar} className="Avatar" />{" "}
+          {" " + blog.userId.userName}
         </p>
+        <h4 class="card-title">{blog.title}</h4>
       </div>
       <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
+        <small class="text-muted">Category: {blog.category}</small>
+        <br />
+        <small class="text-muted">
+          Last updated <Moment date={blog.date} fromNow />
+        </small>
       </div>
     </div>
   );

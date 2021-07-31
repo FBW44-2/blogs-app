@@ -1,51 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import baseURL from "../../config/baseURL";
+import { useParams } from "react-router-dom";
+import Spinner from "../../components/Spinner/Spinner";
+import Moment from "react-moment";
 
+import "./Blog.css";
 export default function Blog() {
+  const [blog, setBlog] = useState([]);
+  const [loading, setLoading] = useState(true);
+  let { id } = useParams();
+  const getBlog = async () => {
+    setLoading(true);
+    try {
+      const blogData = await axios.get(baseURL + "/blogs/" + id);
+      setBlog(blogData.data);
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    getBlog();
+  }, []);
+  console.log(blog);
+  console.log("id ==> ", id);
+
   return (
     <div className="container Page">
-      <h1>Blog title</h1>
-      <figcaption class="blockquote-footer mt-2">
-        By: Jon Do <cite title="Source Title">{new Date().toTimeString()}</cite>
-      </figcaption>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit
-        doloremque assumenda deleniti! Maxime dignissimos tempora odio quia quo,
-        esse nobis similique fuga possimus reiciendis necessitatibus, libero
-        tenetur officiis magni excepturi tempore sequi vero earum cupiditate.
-        Explicabo impedit voluptates debitis praesentium ipsum temporibus
-        molestiae fuga et quia quae! Tenetur soluta quidem molestiae, sit illum
-        repudiandae quo sint impedit ad ex iste quisquam vitae accusamus itaque
-        fugit natus blanditiis eveniet adipisci dicta! Accusantium quia omnis
-        necessitatibus consequatur voluptatibus sequi dignissimos voluptas eum
-        ut ipsa deleniti sed minus nobis praesentium fugiat earum eveniet non,
-        ducimus magni! Officia, rem culpa molestiae nesciunt velit ea?
-      </p>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit
-        doloremque assumenda deleniti! Maxime dignissimos tempora odio quia quo,
-        esse nobis similique fuga possimus reiciendis necessitatibus, libero
-        tenetur officiis magni excepturi tempore sequi vero earum cupiditate.
-        Explicabo impedit voluptates debitis praesentium ipsum temporibus
-        molestiae fuga et quia quae! Tenetur soluta quidem molestiae, sit illum
-        repudiandae quo sint impedit ad ex iste quisquam vitae accusamus itaque
-        fugit natus blanditiis eveniet adipisci dicta! Accusantium quia omnis
-        necessitatibus consequatur voluptatibus sequi dignissimos voluptas eum
-        ut ipsa deleniti sed minus nobis praesentium fugiat earum eveniet non,
-        ducimus magni! Officia, rem culpa molestiae nesciunt velit ea?
-      </p>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit
-        doloremque assumenda deleniti! Maxime dignissimos tempora odio quia quo,
-        esse nobis similique fuga possimus reiciendis necessitatibus, libero
-        tenetur officiis magni excepturi tempore sequi vero earum cupiditate.
-        Explicabo impedit voluptates debitis praesentium ipsum temporibus
-        molestiae fuga et quia quae! Tenetur soluta quidem molestiae, sit illum
-        repudiandae quo sint impedit ad ex iste quisquam vitae accusamus itaque
-        fugit natus blanditiis eveniet adipisci dicta! Accusantium quia omnis
-        necessitatibus consequatur voluptatibus sequi dignissimos voluptas eum
-        ut ipsa deleniti sed minus nobis praesentium fugiat earum eveniet non,
-        ducimus magni! Officia, rem culpa molestiae nesciunt velit ea?
-      </p>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <h1>{blog.title}</h1>
+          <figcaption className="blockquote-footer mt-2">
+            By: <img src={blog.userId.avatar} className="Avatar" />{" "}
+            {" " + blog.userId.userName}
+            <cite title="Source Title">
+              <Moment date={blog.date} fromNow />
+            </cite>
+          </figcaption>
+          <p
+            className="Content"
+            dangerouslySetInnerHTML={{ __html: blog.content }}
+          ></p>
+        </>
+      )}
     </div>
   );
 }

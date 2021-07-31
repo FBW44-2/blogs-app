@@ -1,38 +1,36 @@
 import React, { useState } from "react";
 import axios from "axios";
 import baseURL from "../../config/baseURL";
-
+import ReactQuill from "react-quill";
 export default function CreateBlog() {
-  const [error, setError] = useState();
   const [success, setSuccess] = useState();
+  const [error, setError] = useState();
+  const [content, setContent] = useState();
+
   const submitHandler = async (e) => {
     e.preventDefault();
-    const userName = e.target.username.value;
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    const confirmPassword = e.target.confirmPassword.value;
-
-    const userData = {
-      userName,
-      email,
-      password,
-      confirmPassword,
+    const title = e.target.title.value;
+    const coverImage = e.target.coverImage.value;
+    const category = e.target.category.value;
+    const blogData = {
+      content,
+      category,
+      coverImage,
+      title,
     };
 
-    console.log("Sign up data ==> ", userData);
+    console.log("blogData ==> ", blogData);
     try {
-      const res = await axios.post(baseURL + "/users/signup", userData);
+      const res = await axios.post(baseURL + "/blogs/create", blogData);
       if (res.data.error) {
         setError(res.data.error);
         setSuccess(null);
       } else {
         setError(null);
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("userId", res.data.userId);
-        setSuccess("registered successfully, redirect in 3s");
+        setSuccess("New Blog Created successfully, redirect in 1s");
         setTimeout(() => {
-          window.location.replace("/");
-        }, 3000);
+          window.location.replace("/blogs");
+        }, 1000);
       }
       console.log("RES ==> ", res.data);
     } catch (e) {
@@ -43,23 +41,23 @@ export default function CreateBlog() {
   return (
     <div className="container Page">
       <h1>Create Blog</h1>
-      {error && (
-        <div className="alert alert-danger" role="alert">
-          {error}
-        </div>
-      )}
       {success && (
         <div className="alert alert-success" role="alert">
           {success}
         </div>
       )}
-      <form>
+      {error && (
+        <div class="alert alert-danger" role="alert">
+          {error}
+        </div>
+      )}
+      <form onSubmit={submitHandler}>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Title
           </label>
           <input
-            name="username"
+            name="title"
             type="text"
             className="form-control"
             id="exampleInputEmail1"
@@ -71,7 +69,7 @@ export default function CreateBlog() {
             Category
           </label>
           <input
-            name="email"
+            name="category"
             type="text"
             className="form-control"
             id="exampleInputEmail1"
@@ -83,7 +81,7 @@ export default function CreateBlog() {
             Cover Image URL
           </label>
           <input
-            name="password"
+            name="coverImage"
             type="text"
             className="form-control"
             id="exampleInputPassword1"
@@ -94,11 +92,7 @@ export default function CreateBlog() {
           <label htmlFor="exampleInputPassword1" className="form-label">
             Content
           </label>
-          <textarea
-            name="content"
-            className="form-control"
-            id="exampleInputPassword1"
-          />
+          <ReactQuill value={content} onChange={setContent} theme="snow" />
         </div>
 
         <button type="submit" className="btn btn-primary">
