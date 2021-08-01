@@ -5,5 +5,7 @@
   width: 88%;
 }
 .Actions {
-  width: 10%;
+  width: 15%;
+  display: flex;
+  justify-content: space-around;
 }

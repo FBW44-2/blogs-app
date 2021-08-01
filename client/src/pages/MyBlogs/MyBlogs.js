@@ -43,6 +43,8 @@ export default function MyBlogs({ user }) {
     <div className="container Page">
       <h1>My Blogs</h1>
       <h4>Hallo {user.userName}</h4>
+      <h5>{user.email}</h5>
+
       <Link to="/create-blog" className="btn btn-outline-success mt-2">
         NEW BLOG
       </Link>

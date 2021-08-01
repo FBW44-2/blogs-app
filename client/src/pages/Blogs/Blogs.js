@@ -38,7 +38,7 @@ export default function Blogs() {
             </div>
           ))
         )}
-        {blogs.length < 1 && "Blogs Not Found!"}
+        {blogs.length < 1 && !loading && "Blogs Not Found!"}
       </div>
     </div>
   );
