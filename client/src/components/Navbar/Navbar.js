@@ -121,7 +121,7 @@ export default function Navbar({ user }) {
       </nav>
       {user && user.isAdmin && (
         <div class="alert alert-warning text-center" role="alert">
-          Admin User
+          Admin User {" ( " + user.userName + " | " + user.email + " )"}
         </div>
       )}
     </>

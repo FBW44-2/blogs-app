@@ -19,6 +19,10 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  date: {
+    type: String,
+    default: new Date(),
+  },
   avatar: {
     type: String,
     default:
