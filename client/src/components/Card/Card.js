@@ -9,19 +9,24 @@ export default function Card({ blog }) {
         className="CardImg"
         style={{ backgroundImage: `url(${blog.coverImage})` }}
       ></div>
-      <div class="card-footer">
+
+      <h4 class="card-title">{blog.title}</h4>
+      <div>
         <small class="text-muted">
-          Last updated <Moment date={blog.update} fromNow />
-        </small>
-      </div>
-      <div class="card-body">
-        <p class="card-text">
-          By: <img src={blog.userId.avatar} className="Avatar" />{" "}
-          {" " + blog.userId.userName + " | "}{" "}
+          {" "}
+          By: {" " + blog.userId.userName + "  "}
+          <img src={blog.userId.avatar} className="Avatar" />
+          {" . "}
           <Moment date={blog.date} fromNow />
+        </small>
+        <p>
+          <small class="text-muted">Category: {blog.category}</small>
         </p>
-        <small class="text-muted">Category: {blog.category}</small>
-        <h4 class="card-title">{blog.title}</h4>
+        <p>
+          <small class="text-muted">
+            Last updated <Moment date={blog.update} fromNow />
+          </small>
+        </p>
       </div>
 
       {blog.views == 0 ? (

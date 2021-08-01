@@ -64,7 +64,7 @@ exports.findAll = async (req, res, next) => {
     const blogs = await Blog.find()
       .select("-content")
       .populate("userId", "-password")
-      .sort("-update");
+      .sort({ update: -1 });
     res.json(blogs);
   } catch (e) {
     console.log(e);
