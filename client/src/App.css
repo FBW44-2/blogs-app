@@ -3,3 +3,6 @@
   display: flex;
   flex-direction: column;
 }
+.Content img {
+  width: 100%;
+}
