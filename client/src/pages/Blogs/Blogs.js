@@ -32,7 +32,7 @@ export default function Blogs() {
         ) : (
           blogs.map((blog, idx) => (
             <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3" key={idx}>
-              <Link to={"/blog/" + blog._id}>
+              <Link to={"/blog/" + blog._id} style={{ textDecoration: "none" }}>
                 <Card blog={blog} />
               </Link>
             </div>

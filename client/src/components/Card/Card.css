@@ -3,6 +3,10 @@
   max-width: 100%;
   position: relative;
   border: none;
+  transition: all 0.2s ease-in-out;
+}
+.Card:hover {
+  transform: scale(1.05);
 }
 .Card .Alert {
   position: absolute;
