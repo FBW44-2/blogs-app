@@ -1,4 +1,26 @@
 .Card {
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   max-width: 100%;
+  position: relative;
+  border: none;
+}
+.Card .Alert {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: green;
+}
+.CardImg {
+  height: 272px;
+  width: 100%;
+  background-color: red;
+}
+.Card .CardViews {
+  background: rgba(90, 90, 211, 0.708);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.NewCard {
+  border: 1px solid green;
 }

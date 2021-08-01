@@ -31,7 +31,7 @@ export default function Blogs() {
           <Spinner />
         ) : (
           blogs.map((blog, idx) => (
-            <div className="col-4" key={idx}>
+            <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3" key={idx}>
               <Link to={"/blog/" + blog._id}>
                 <Card blog={blog} />
               </Link>

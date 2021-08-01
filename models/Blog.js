@@ -15,6 +15,10 @@ const BlogSchema = new Schema({
     type: String,
     require: true,
   },
+  views: {
+    type: Number,
+    default: 0,
+  },
   content: {
     type: String,
     require: true,

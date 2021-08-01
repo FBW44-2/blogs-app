@@ -34,18 +34,17 @@ exports.edit = async (req, res, next) => {
     await blog.save();
   }
   res.json(true);
-  console.log("edit req.body ==> ", req.body);
-  console.log("edit req.user ==> ", req.user);
-  console.log("edit params ==> ", req.params);
 };
 exports.findOne = async (req, res, next) => {
-  console.log("findOne req.body ==> ", req.body);
-  console.log("findOne req.user ==> ", req.user);
-  console.log("findOne params ==> ", req.params);
-  const { content, category, coverImage, title } = req.body;
   const { id } = req.params;
   try {
     const blog = await Blog.findById(id).populate("userId", "-password");
+    if (blog.views) {
+      blog.views = blog.views + 1;
+    } else {
+      blog.views = 1;
+    }
+    await blog.save();
     res.json(blog);
   } catch (e) {
     console.log(e);
@@ -64,7 +63,8 @@ exports.findAll = async (req, res, next) => {
   try {
     const blogs = await Blog.find()
       .select("-content")
-      .populate("userId", "-password");
+      .populate("userId", "-password")
+      .sort("-date");
     res.json(blogs);
   } catch (e) {
     console.log(e);

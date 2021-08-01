@@ -42,6 +42,8 @@ export default function Blog() {
             <cite title="Source Title">
               <Moment date={blog.update} fromNow />
             </cite>
+            {" | "}
+            <i class="fas fa-eye"></i> {blog.views}
           </figcaption>
           <p
             className="Content"
