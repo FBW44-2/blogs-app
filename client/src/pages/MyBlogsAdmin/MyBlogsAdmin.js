@@ -52,7 +52,9 @@ export default function MyBlogsAdmin({ user }) {
           blogs.map((blog, idx) => (
             <li key={idx} className="list-group-item Blog">
               <div className="BlogContent">
-                {blog.title + " / "} <Moment date={blog.date} fromNow />
+                {blog.title + ". "}
+                <Moment date={blog.date} fromNow />{" "}
+                <b>Created By: {blog.userId.userName}</b>
               </div>
               <div className="Actions">
                 <Link
