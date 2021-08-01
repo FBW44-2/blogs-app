@@ -25,7 +25,7 @@ exports.edit = async (req, res, next) => {
   const { content, category, coverImage, title } = req.body;
   const { id } = req.params;
   const blog = await Blog.findById(id);
-  if (req.user._id.toString() === blog.userId.toString()) {
+  if (req.user._id.toString() === blog.userId.toString() || req.user.isAdmin) {
     if (content) blog.content = content;
     if (category) blog.category = category;
     if (coverImage) blog.coverImage = coverImage;
@@ -53,7 +53,12 @@ exports.findOne = async (req, res, next) => {
 exports.deleteOne = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const blogs = await Blog.findOneAndRemove({ _id: id });
+    if (
+      req.user._id.toString() === blog.userId.toString() ||
+      req.user.isAdmin
+    ) {
+      const blogs = await Blog.findOneAndRemove({ _id: id });
+    }
     res.json(true);
   } catch (e) {
     console.log(e);

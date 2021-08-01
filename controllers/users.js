@@ -78,9 +78,16 @@ exports.signIn = async (req, res, next) => {
 exports.getUser = async (req, res, next) => {
   const id = req.params.id;
 
-  const user = await User.findById(id).select("email userName avatar");
+  const user = await User.findById(id).select("-password");
   res.send(user);
   console.log(user);
+};
+
+exports.getAllUsers = async (req, res, next) => {
+  if (req.user.isAdmin) {
+    const users = await User.find().select("-password");
+    res.send(users);
+  }
 };
 
 exports.edit = async (req, res, next) => {

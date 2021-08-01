@@ -17,6 +17,8 @@ import setAuth from "./config/setAuth";
 import CreateBlog from "./pages/CreateBlog/CreateBlog";
 import EditBlog from "./pages/EditBlog/EditBlog";
 import Blog from "./pages/Blog/Blog";
+import MyBlogsAdmin from "./pages/MyBlogsAdmin/MyBlogsAdmin";
+import CurrentUsers from "./pages/CurrentUsers/CurrentUsers";
 function App() {
   const [user, setUser] = useState();
 
@@ -75,6 +77,17 @@ function App() {
         {user && (
           <Route exact path="/my-blogs">
             <MyBlogs user={user} />
+          </Route>
+        )}
+
+        {user && user.isAdmin && (
+          <Route exact path="/all-blogs-admin">
+            <MyBlogsAdmin user={user} />
+          </Route>
+        )}
+        {user && user.isAdmin && (
+          <Route exact path="/current-users">
+            <CurrentUsers user={user} />
           </Route>
         )}
         {user && (

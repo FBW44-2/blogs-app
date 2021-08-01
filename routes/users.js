@@ -4,6 +4,8 @@ const auth = require("../middleware/authenticator");
 
 router.post("/signup", user.signUp);
 router.post("/signin", user.signIn);
+router.get("/all-users", auth, user.getAllUsers);
+
 router.get("/:id", user.getUser);
 router.post("/edit", auth, user.edit);
 
