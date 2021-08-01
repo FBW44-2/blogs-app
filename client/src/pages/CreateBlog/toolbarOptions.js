@@ -12,7 +12,7 @@ const toolbarOptions = [
 
   [{ size: ["small", false, "large", "huge"] }], // custom dropdown
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
-
+  ["link", "image", "video", "formula"],
   [{ color: [] }, { background: [] }], // dropdown with defaults from theme
   [{ font: [] }],
   [{ align: [] }],

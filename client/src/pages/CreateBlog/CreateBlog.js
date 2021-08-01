@@ -95,6 +95,7 @@ export default function CreateBlog() {
             Content
           </label>
           <ReactQuill
+            className="h-25"
             modules={{ toolbar: toolbarOptions }}
             value={content}
             onChange={setContent}

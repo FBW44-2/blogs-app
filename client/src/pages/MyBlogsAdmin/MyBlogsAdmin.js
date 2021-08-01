@@ -51,7 +51,12 @@ export default function MyBlogsAdmin({ user }) {
         ) : (
           blogs.map((blog, idx) => (
             <li key={idx} className="list-group-item Blog">
-              <img src={blog.coverImage} className="mx-1" width="60" />
+              <img
+                src={blog.coverImage}
+                className="mx-1"
+                width="60"
+                height="60"
+              />
               <div className="BlogContent">
                 {blog.title + ". "}
                 <Moment date={blog.date} fromNow />{" "}
