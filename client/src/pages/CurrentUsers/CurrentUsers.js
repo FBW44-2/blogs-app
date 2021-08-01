@@ -39,15 +39,13 @@ export default function CurrentUsers({ user }) {
         ) : (
           users.map((i, idx) => (
             <li key={idx} className="list-group-item Blog">
+              <img src={i.avatar} width="30" className="mx-1" />
               <div className="BlogContent">
-                {"Name: " +
-                  i.userName +
-                  " . " +
-                  "Email: " +
-                  i.email +
-                  " . " +
-                  "Is admin: " +
-                  i.isAdmin}
+                <span class="badge bg-primary">Name: {i.userName}</span>
+                <span class="badge bg-info text-dark">Email: {i.email} </span>
+                <span class="badge bg-secondary">
+                  Is admin: {i.isAdmin.toString()}
+                </span>
               </div>
             </li>
           ))

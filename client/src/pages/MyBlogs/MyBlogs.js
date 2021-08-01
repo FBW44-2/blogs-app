@@ -54,6 +54,7 @@ export default function MyBlogs({ user }) {
         ) : (
           blogs.map((blog, idx) => (
             <li key={idx} className="list-group-item Blog">
+              <img src={blog.coverImage} className="mx-1" width="60" />
               <div className="BlogContent">
                 {blog.title + " / "} <Moment date={blog.date} fromNow />
               </div>
